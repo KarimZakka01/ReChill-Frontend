@@ -1,4 +1,3 @@
-import "./Navbar.css";
 import { MenuItems } from "./MenuItems";
 import logos from "../../images/logo.png";
 
