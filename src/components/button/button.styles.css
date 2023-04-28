@@ -1,0 +1,43 @@
+.rechill-button {
+  @apply px-6 py-2
+  bg-primary
+  rounded-full
+  text-white
+  font-bold
+  shadow-md
+  hover:filter
+  hover:saturate-200
+  hover:shadow-sm
+  active:saturate-50
+  active:scale-95
+  ease-out
+  transition-all;
+}
+
+.rechill-button-outlined {
+  @apply bg-transparent
+  border-solid
+  border-2
+  border-primary
+  text-primary;
+}
+
+.rechill-button-text {
+  @apply bg-transparent
+  shadow-none
+  hover:shadow-none
+  text-primary;
+}
+
+.rechill-button-sm {
+  @apply text-sm;
+}
+.rechill-button-md {
+  @apply text-lg;
+}
+.rechill-button-lg {
+  @apply text-2xl;
+}
+.rechill-button-xl {
+  @apply text-3xl;
+}

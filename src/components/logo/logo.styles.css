@@ -1,0 +1,16 @@
+.logo {
+  @apply h-auto;
+}
+
+.xl {
+  @apply w-72;
+}
+.lg {
+  @apply w-48;
+}
+.md {
+  @apply w-24;
+}
+.sm {
+  @apply w-16;
+}

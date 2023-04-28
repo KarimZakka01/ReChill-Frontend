@@ -1,0 +1,33 @@
+.directional-container {
+  @apply flex
+          py-24
+          px-64
+          gap-32 mr-32;
+}
+
+.directional-container-reversed {
+  @apply flex-row-reverse text-right ml-32 mr-0;
+}
+
+.directional-container-text {
+  @apply flex 
+          flex-col
+          justify-between;
+}
+
+.directional-container-title {
+  @apply text-6xl
+          text-gray-800
+          font-extrabold
+          mb-6;
+}
+
+.directional-container-description {
+  @apply text-2xl
+        text-gray-700;
+}
+
+.directional-container-image {
+  @apply rounded-3xl
+          w-80;
+}

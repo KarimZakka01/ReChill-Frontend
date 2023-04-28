@@ -1,0 +1,19 @@
+.footer {
+  @apply py-4 flex justify-around gap-2;
+}
+
+span {
+  @apply text-2xl font-bold;
+}
+
+.centered-container {
+  @apply flex flex-col items-center gap-3;
+}
+
+.purple-span {
+  @apply text-primary;
+}
+
+.blue-span {
+  @apply text-secondary;
+}

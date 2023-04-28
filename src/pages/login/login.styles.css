@@ -1,0 +1,11 @@
+.login {
+  @apply grow flex flex-col gap-4 items-center justify-center bg-gradient-to-tr to-primary from-secondary border-y-2 border-gray-400;
+}
+
+.login-signup-button-group {
+  @apply flex gap-4;
+}
+
+.login-signup-form {
+  @apply flex flex-col gap-8 w-2/4 p-24 rounded-3xl shadow-2xl bg-white;
+}

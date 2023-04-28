@@ -1,0 +1,15 @@
+.header {
+  @apply py-14 px-10 flex justify-between items-center gap-20;
+}
+
+.header-navigation-container {
+  @apply flex gap-10 text-gray-800 grow;
+}
+
+.header-navigation-container a {
+  @apply hover:text-primary font-bold transition-all ease-in-out;
+}
+
+.header-action-buttons {
+  @apply flex gap-5;
+}

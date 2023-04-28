@@ -1,0 +1,16 @@
+.rechill-textfield {
+  @apply flex flex-col gap-4;
+}
+
+.rechill-textfield-label {
+  @apply font-bold text-xl text-gray-600 pl-2;
+}
+
+.rechill-textfield-input {
+  @apply p-2
+          text-xl
+          text-gray-600
+          rounded-full
+          border-2
+          border-primary;
+}
