@@ -35,7 +35,7 @@ function DropdownWithContext({ label, children, onChange }: IDropdownProps) {
 
   useEffect(() => {
     onChange && onChange(dropdownState.value);
-  }, [dropdownState.value, onChange]);
+  }, [dropdownState.value]);
 
   return (
     <div className="dropdown-container">
