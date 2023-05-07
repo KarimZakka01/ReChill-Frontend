@@ -1,11 +1,10 @@
 import { Button } from '@components/button';
 import { Dropdown, DropdownItem } from '@components/dropdown';
 import { TextField } from '@components/textfield';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './signup.styles.css';
 import { useState } from 'react';
 import { signup } from "@services/apiService";
-
 
 export interface ISignupProps {}
 export interface signupForm {
@@ -21,16 +20,20 @@ export interface signupForm {
 }
 
 export function Signup(props: ISignupProps) {
-
+    let navigate = useNavigate();
     const [formValues, setFormValues] = useState<signupForm>({firstName: "",lastName: "", gender: "Male",phoneNumber: "", location: "",email: "", password: "", dob: new Date(),userType:"Standard"});
-  
+    const [errMessage, setErrMessage] = useState("");
     async function handleSubmit(event: any) {
       
       event.preventDefault();
   
       try {
-        const data = await signup(formValues);
-        console.log(data);
+        const data = await signup(formValues);        
+        if(data.success){
+          navigate("/login");
+        }else{
+          setErrMessage(data.message);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -44,6 +47,7 @@ export function Signup(props: ISignupProps) {
             <Button>Login</Button>
           </Link>
         </div>
+        <label>{errMessage}</label>
         <div className="signup-signup-form">
           <TextField type="text" label="First name" value={formValues.firstName} onChange={(event) => setFormValues({...formValues, firstName: event.target.value})}/>
           <TextField type="text" label="Last name" value={formValues.lastName} onChange={(event) => setFormValues({...formValues, lastName: event.target.value})}/>

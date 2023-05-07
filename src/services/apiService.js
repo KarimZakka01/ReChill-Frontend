@@ -12,7 +12,7 @@ export async function login(email, password) {
       }
   
       const data = await response.text();
-      return data;
+      return {success: response.ok, message: data};
     } catch (error) {
       console.error(`Error fetching data: ${error}`);
       throw error;
@@ -33,7 +33,7 @@ export async function signup(formValues) {
       }
   
       const data = await response.text();
-      return data;
+      return {success: response.ok, message: data};
     } catch (error) {
       console.error(`Error fetching data: ${error}`);
       throw error;
