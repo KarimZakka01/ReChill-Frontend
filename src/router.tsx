@@ -6,7 +6,8 @@ import Root from '@pages/root';
 import { Services } from '@pages/services';
 import { Signup } from '@pages/signup';
 import {  RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { UserContextProvider, useUserContext } from '@services/userContext/UserContext';
+import {  useUserContext } from '@services/userContext/UserContext';
+import { Profile } from '@pages/profile';
 
 export interface IRouterProps {}
 
@@ -36,6 +37,10 @@ const routes : RouteObject[] = [
         path: '/services',
         element: <Services />,
       },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
     ],
   },
 ];
@@ -46,8 +51,6 @@ export default function Router() {
   const restrictedPaths: string[] = ['/about']; 
 
   const filterRoutes = (routes: RouteObject[]): RouteObject[] => {
-    console.log(user);
-    console.log(routes);
     
     if (!user) {
       return routes.filter(route => route.path && !restrictedPaths.includes(route.path)); // Exclude restricted paths when no user is logged in

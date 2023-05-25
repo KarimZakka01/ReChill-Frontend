@@ -5,14 +5,15 @@ import { Button } from '@components/button';
 import { Link } from 'react-router-dom';
 import { login } from "@services/apiService";
 import {  useState } from 'react';
-import { UserContextProvider, useUserContext } from '@services/userContext/UserContext';
+import { User, useUserContext } from '@services/userContext/UserContext';
+import { useNavigate } from 'react-router-dom';
 export interface ILoginProps {}
 
 
 
 export function Login(props: ILoginProps) {
   const {setUserAndLoginStatus} = useUserContext();
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,13 +24,11 @@ export function Login(props: ILoginProps) {
     try {
       const data = await login(email, password);    
       data.body?.getReader().read().then(resp => {
-        console.log(resp.done);
-        console.log(resp.value);
         const chunk = new TextDecoder().decode(resp.value);
         let formattedResp = JSON.parse(chunk);
-        console.log(formattedResp.userInfo);
-        
-        
+        const user : User =  formattedResp.userInfo
+        setUserAndLoginStatus(user,true)
+        navigate('/');
       });
       
     } catch (error) {

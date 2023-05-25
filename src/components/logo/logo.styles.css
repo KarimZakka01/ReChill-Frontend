@@ -14,3 +14,6 @@
 .sm {
   @apply w-16;
 }
+.xsm {
+  @apply w-12;
+}

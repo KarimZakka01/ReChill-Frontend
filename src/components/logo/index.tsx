@@ -3,7 +3,7 @@ import './logo.styles.css';
 type ImageType = JSX.IntrinsicElements['img'];
 
 export interface ILogoProps extends ImageType {
-  size: 'xl' | 'lg' | 'md' | 'sm';
+  size: 'xl' | 'lg' | 'md' | 'sm' | 'xsm';
   src: string;
   alt: string;
 }

@@ -6,6 +6,7 @@ export interface IDirectionalContainerProps extends React.PropsWithChildren {
   imageSource: string;
   action: React.MouseEventHandler<HTMLButtonElement>;
   reverse?: boolean;
+  buttonText?: string
 }
 
 export default function DirectionalContainer({
@@ -14,6 +15,7 @@ export default function DirectionalContainer({
   action,
   children,
   reverse = false,
+  buttonText = "get started"
 }: IDirectionalContainerProps) {
   return (
     <div
@@ -28,7 +30,7 @@ export default function DirectionalContainer({
         </div>
         <div>
           <Button size="xl" onClick={action}>
-            Get Started
+            {buttonText}
           </Button>
         </div>
       </div>
