@@ -5,11 +5,12 @@ import { Login } from '@pages/login';
 import Root from '@pages/root';
 import { Services } from '@pages/services';
 import { Signup } from '@pages/signup';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {  RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { UserContextProvider, useUserContext } from '@services/userContext/UserContext';
 
 export interface IRouterProps {}
 
-const router = createBrowserRouter([
+const routes : RouteObject[] = [
   {
     path: '/',
     element: <Root />,
@@ -37,12 +38,31 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
 
 export default function Router() {
+
+  const { user } = useUserContext();
+  const restrictedPaths: string[] = ['/about']; 
+
+  const filterRoutes = (routes: RouteObject[]): RouteObject[] => {
+    console.log(user);
+    console.log(routes);
+    
+    if (!user) {
+      return routes.filter(route => route.path && !restrictedPaths.includes(route.path)); // Exclude restricted paths when no user is logged in
+    }
+    if (user.userType === 'Therapist') {
+      return routes; // Allow all routes for Therapists
+    }
+    return routes;
+  };
+
+  const filteredRoutes = filterRoutes(routes);
+
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={createBrowserRouter(filteredRoutes)} />
     </>
   );
 }

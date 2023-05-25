@@ -4,24 +4,34 @@ import './login.styles.css';
 import { Button } from '@components/button';
 import { Link } from 'react-router-dom';
 import { login } from "@services/apiService";
-import { useState } from 'react';
+import {  useState } from 'react';
+import { UserContextProvider, useUserContext } from '@services/userContext/UserContext';
 export interface ILoginProps {}
 
 
 
 export function Login(props: ILoginProps) {
+  const {setUserAndLoginStatus} = useUserContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    console.log(1);
     
     event.preventDefault();
 
     try {
-      const data = await login(email, password);
-      console.log(data);
+      const data = await login(email, password);    
+      data.body?.getReader().read().then(resp => {
+        console.log(resp.done);
+        console.log(resp.value);
+        const chunk = new TextDecoder().decode(resp.value);
+        let formattedResp = JSON.parse(chunk);
+        console.log(formattedResp.userInfo);
+        
+        
+      });
+      
     } catch (error) {
       console.error(error);
     }
