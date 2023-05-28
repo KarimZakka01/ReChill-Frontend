@@ -11,53 +11,52 @@ export function Landing(props: ILandingProps) {
         action={() => {}}
         imageSource={ReChillLogo}
         title="Unwind Your Mind"
+        buttonText="Read More"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        magnam amet facere. Cumque nam cupiditate fugit eum sed nulla explicabo
-        blanditiis, molestiae voluptatum eligendi nisi, numquam iusto omnis
-        corporis sint.
+        Find tranquility and peace as we guide you on a journey towards a calmer, more balanced state of mind. 
+        It's time to quiet your mind and embark on the path to inner harmony. 
+        Join us on this transformative adventure at Rechill.
       </DirectionalContainer>
       <DirectionalContainer
         action={() => {}}
         imageSource={ReChillLogo}
-        title="Therapy session header"
+        title="Therapy Sessions"
         reverse
+        buttonText="Discover Now"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        magnam amet facere. Cumque nam cupiditate fugit eum sed nulla explicabo
-        blanditiis, molestiae voluptatum eligendi nisi, numquam iusto omnis
-        corporis sint.
+       Take control of overthinking and embark on a journey towards inner peace and a balanced mind.
+       Book your confidential session today at Therapy Sessions, nd discover the transformative power of professional guidance.
+
       </DirectionalContainer>
       <DirectionalContainer
         action={() => {}}
         imageSource={ReChillLogo}
-        title="Game Header"
+        title="Personality Test"
+        buttonText="Discover Now"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        magnam amet facere. Cumque nam cupiditate fugit eum sed nulla explicabo
-        blanditiis, molestiae voluptatum eligendi nisi, numquam iusto omnis
-        corporis sint.
+        Unlock self-awareness for a mindful life. Gain profound insights into your unique traits and tendencies. 
+        Explore the depths of your personality and understand why overthinking may affect you. 
+        Take our comprehensive test and uncover the keys to a more balanced existence.
       </DirectionalContainer>
       <DirectionalContainer
         action={() => {}}
         imageSource={ReChillLogo}
-        title="Daily Video Header"
+        title="Daily Videos"
         reverse
+        buttonText="Discover Now"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        magnam amet facere. Cumque nam cupiditate fugit eum sed nulla explicabo
-        blanditiis, molestiae voluptatum eligendi nisi, numquam iusto omnis
-        corporis sint.
+        Inspiring moments to uplift your day. Start each morning with motivational videos that ignite your spirit and fuel positivity. 
+        Discover wisdom, embrace new perspectives, and embark on a journey of personal growth. 
       </DirectionalContainer>
       <DirectionalContainer
         action={() => {}}
         imageSource={ReChillLogo}
-        title="Maba3ref"
+        title="Endless Game"
+        buttonText="Discover Now"
       >
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-        magnam amet facere. Cumque nam cupiditate fugit eum sed nulla explicabo
-        blanditiis, molestiae voluptatum eligendi nisi, numquam iusto omnis
-        corporis sint.
+        Escape overthinking with endless fun. Challenge yourself, and enjoy immersive gameplay. 
+        Indulge in our game designed to provide a delightful break from the chaos. 
+        Dive into the world of entertainment and relaxation at Rechill, where excitement awaits your every move.  
       </DirectionalContainer>
     </div>
   );

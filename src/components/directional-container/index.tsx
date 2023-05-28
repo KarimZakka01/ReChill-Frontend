@@ -1,12 +1,13 @@
-import { Button } from '@components/button';
-import './directional-container.styles.css';
+import { Button } from '@components/button'; //imports button component from a module located at '@components/button' 
+import './directional-container.styles.css'; //imports the CSS file './directional-container.styles.css'
 
-export interface IDirectionalContainerProps extends React.PropsWithChildren {
-  title: string;
-  imageSource: string;
-  action: React.MouseEventHandler<HTMLButtonElement>;
-  reverse?: boolean;
-  buttonText?: string
+export interface IDirectionalContainerProps extends React.PropsWithChildren { 
+  // defines the IDirectionalContainerProps interface which specifies the expected props for the DirectionalContainer component
+  title: string; //title of the container
+  imageSource: string; //path of the image to be displayed
+  action: React.MouseEventHandler<HTMLButtonElement>; //event handler function for the button click event
+  reverse?: boolean; // (? -> optional) Specifies whether to reverse the layout of the container. Defaults to false.
+  buttonText?: string // text to display on the button. Defaults to "get started".
 }
 
 export default function DirectionalContainer({
