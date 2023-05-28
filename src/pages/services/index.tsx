@@ -11,7 +11,7 @@ export function Services(props: IServicesProps) {
   return <div className="services"><DirectionalContainer
   action={() => { navigate('/therapy/book')}}
   imageSource={ReChillLogo}
-  title="Book a session"
+  title="Book a Session"
   buttonText='Book Now'
 >
 Our experienced and empathetic licensed therapists provide a safe and confidential 
