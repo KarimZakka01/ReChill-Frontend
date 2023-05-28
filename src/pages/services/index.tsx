@@ -26,7 +26,7 @@ self-discovery and personal growth.
   reverse
   buttonText='Start Now'
 >
-"Personality Test: Discover the depths of your true self. Gain profound 
+Personality Test: Discover the depths of your true self. Gain profound 
 insights into your personality traits and tendencies. Uncover the driving
  forces behind your thoughts and behaviors. Embrace self-awareness and unlock 
  the path to personal growth. Take our comprehensive personality test today 
