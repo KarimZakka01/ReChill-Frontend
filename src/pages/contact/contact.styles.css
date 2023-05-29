@@ -1,0 +1,37 @@
+.contact-form {
+    @apply w-full mx-auto p-6 bg-gradient-to-tr to-primary from-secondary rounded-lg shadow-md;
+  }
+  
+  .contact-form h2 {
+    @apply text-2xl text-center mb-6 text-gray-800 text-white font-bold;
+  }
+  
+  .form-group {
+    @apply mb-6;
+  }
+  
+  label {
+    @apply block text-lg font-bold text-gray-800 mb-2 text-white;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  textarea {
+    @apply w-full px-4 py-2 text-lg bg-white border border-gray-300 rounded-md;
+  }
+  
+  textarea {
+    @apply resize-y h-32;
+  }
+  
+  .contactButton {
+    @apply block w-full px-4 py-2 text-lg font-bold text-white border border-transparent rounded-md cursor-pointer transition duration-300 ease-in-out;
+  }
+  
+  .contactButton:hover {
+    @apply bg-purple-900;
+  }
+  
+  .contactButton:disabled {
+    @apply bg-gray-400 cursor-not-allowed;
+  }

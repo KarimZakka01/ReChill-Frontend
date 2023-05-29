@@ -20,7 +20,7 @@ Book your therapy session now and embark on a transformative journey of
 self-discovery and personal growth.
 </DirectionalContainer>
 <DirectionalContainer
-  action={() => {}}
+  action={() => {navigate('/personalitytest')}}
   imageSource={ReChillLogo}
   title="Take a Test"
   reverse
@@ -44,7 +44,7 @@ that awaken your inner potential. Explore thought-provoking content that ignites
  videos be your source of motivation, empowerment, and self-discovery.
 </DirectionalContainer>
 <DirectionalContainer
-  action={() => {}}
+  action={() => {navigate('/game')}}
   imageSource={ReChillLogo}
   title="Play a game"
   reverse

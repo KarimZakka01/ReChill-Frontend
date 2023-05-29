@@ -1,4 +1,7 @@
 .about {
+  background: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
+  border-radius: 10px;
+  width: 100%;
     max-width: 800px;
     margin: 0 auto;
     padding: 40px;
@@ -12,11 +15,12 @@
   .about-header h1 {
     font-size: 48px;
     margin-bottom: 10px;
+    color: white;
   }
   
   .about-header p {
     font-size: 24px;
-    color: #999;
+    color: white;
   }
   
   .about-content {
@@ -27,12 +31,12 @@
     font-size: 36px;
     margin-top: 40px;
     margin-bottom: 20px;
-    color: #444;
+    color: white;
   }
   
   .about-content p {
     font-size: 18px;
-    color: #666;
+    color: white;
   }
 
 

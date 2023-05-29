@@ -5,6 +5,10 @@ import { Login } from '@pages/login';
 import Root from '@pages/root';
 import { Services } from '@pages/services';
 import { Signup } from '@pages/signup';
+import { Contact } from '@pages/contact';
+import { PersonalityTestPage } from '@pages/personalitytest';
+import { TherapySessionPage } from '@pages/therapy';
+import { GamePage } from '@pages/services/game/game';
 import {  RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {  useUserContext } from '@services/userContext/UserContext';
 import { Profile } from '@pages/profile';
@@ -40,6 +44,22 @@ const routes : RouteObject[] = [
       {
         path: '/profile',
         element: <Profile />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+      },
+      {
+        path: '/therapy/book',
+        element: <TherapySessionPage />,
+      },
+      {
+        path: '/personalitytest',
+        element: <PersonalityTestPage />,
+      },
+      {
+        path: '/game',
+        element: <GamePage />,
       },
     ],
   },

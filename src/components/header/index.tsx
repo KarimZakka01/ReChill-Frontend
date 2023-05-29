@@ -17,6 +17,7 @@ export function Header(props: IHeaderProps) {
         <Link to="/">Home</Link>
         <Link to="/services">Services</Link>
         <Link to="/about">About</Link>
+        <Link to="/contact">Contact Us</Link>
       </nav>
       {!isLoggedIn && (
       <div className="header-action-buttons">
@@ -26,6 +27,7 @@ export function Header(props: IHeaderProps) {
         <Link to="/signup">
           <Button>Sign Up for free</Button>
         </Link>
+       
       </div>
       )} 
       { isLoggedIn && user && (
