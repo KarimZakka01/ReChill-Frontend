@@ -6,10 +6,15 @@ import { Logo } from '@components/logo';
 import { Link } from 'react-router-dom';
 import { Button } from '@components/button';
 import { useUserContext } from '@services/userContext/UserContext';
+
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
-  const { isLoggedIn, user} = useUserContext();
+  const { isLoggedIn, user, setUserAndLoginStatus} = useUserContext();
+  function logout(){
+    setUserAndLoginStatus(null,false);
+  }
+
   return (
     <div className="header">
       <Logo size="sm" src={ReChillLogoAlt} alt="ReChill colored logo" />
@@ -34,8 +39,9 @@ export function Header(props: IHeaderProps) {
         <div className="header-action-buttons">
         <Logo size="xsm" src={profilLogoAlt} alt="Profile icon" />
         <Link to="/profile">
-          <Button variant='text' color='black'>{user.firstName} {user.lastName}</Button>
+          <Button variant='text'>{user.firstName} {user.lastName}</Button>
         </Link>
+        <Button variant='text' onClick={logout}>Logout</Button>
       </div>
       )}
     </div>
