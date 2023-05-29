@@ -1,19 +1,21 @@
 import ReChillLogoAlt from '@assets/logos/Rechill colored logo (1).svg';
 import profilLogoAlt from '@assets/logos/profile-icon.jpg'
-import * as React from 'react';
 import './header.styles.css';
 import { Logo } from '@components/logo';
 import { Link } from 'react-router-dom';
 import { Button } from '@components/button';
 import { useUserContext } from '@services/userContext/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export interface IHeaderProps {}
 
 export function Header(props: IHeaderProps) {
+  const navigate = useNavigate();
   const { isLoggedIn, user, setUserAndLoginStatus} = useUserContext();
   function logout(){
     setUserAndLoginStatus(null,false);
-  }
+    navigate('/');
+  }  
 
   return (
     <div className="header">

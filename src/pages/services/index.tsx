@@ -1,15 +1,26 @@
 import DirectionalContainer from '@components/directional-container';
 import ReChillLogo from '@assets/images/chicken.png';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '@services/userContext/UserContext';
 
 import './services.styles.css';
 export interface IServicesProps {}
 
 export function Services(props: IServicesProps) {
+  const { isLoggedIn, user} = useUserContext();
   const navigate = useNavigate();
+  function navigateToBooking(){
+    console.log(user);
+    
+    if(isLoggedIn && user?.userType === 'Standard'){
+      navigate('/therapy/book')
+    }else{
+      alert('You must be signed in to book a session !')
+    }
+  }
 
   return <div className="services"><DirectionalContainer
-  action={() => { navigate('/therapy/book')}}
+  action={navigateToBooking}
   imageSource={ReChillLogo}
   title="Book a Session"
   buttonText='Book Now'
