@@ -1,5 +1,5 @@
 .header {
-  @apply py-14 px-10 flex justify-between items-center gap-20;
+  @apply py-14 px-10 flex justify-between items-center gap-20 text-xl	;
 }
 
 .header-navigation-container {

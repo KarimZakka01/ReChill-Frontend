@@ -8,10 +8,14 @@ import { Signup } from '@pages/signup';
 import { Contact } from '@pages/contact';
 import { PersonalityTestPage } from '@pages/personalitytest';
 import { TherapySessionPage } from '@pages/therapy';
-import { GamePage } from '@pages/services/game/game';
+import { GamePage } from '@pages/services/game';
+import { VideoPage } from '@pages/youtube';
+import { AdminPage } from '@pages/admin';
 import {  RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {  useUserContext } from '@services/userContext/UserContext';
 import { Profile } from '@pages/profile';
+
+
 
 export interface IRouterProps {}
 
@@ -61,6 +65,14 @@ const routes : RouteObject[] = [
         path: '/game',
         element: <GamePage />,
       },
+      {
+        path: '/video',
+        element: <VideoPage />,
+      },
+      {
+        path: '/admin',
+        element: <AdminPage />,
+      },
     ],
   },
 ];
@@ -82,6 +94,7 @@ export default function Router() {
       return routes; // Allow all routes for Therapists
     }
     
+  
     routes[0].children = children;
     return routes;
   };

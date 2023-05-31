@@ -5,9 +5,7 @@ const ChatBot = () => {
     if (!(window as any).kommunicate) {
       (function (d, m) {
         var kommunicateSettings = {
-          appId: "28f8a38af7c17f4a7a64681afe01b6a0f",
-          popupWidget: true,
-          automaticChatOpenOnNavigation: true,
+          "appId":"28f8a38af7c17f4a7a64681afe01b6a0f","popupWidget":true,"automaticChatOpenOnNavigation":true
         };
         var s = document.createElement("script");
         s.type = "text/javascript";

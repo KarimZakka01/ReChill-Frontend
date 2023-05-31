@@ -1,5 +1,5 @@
 import React, { useState, useEffect  } from "react";
-
+import { fetchQuestions } from "@services/apiService";
 
 export function PersonalityTestPage() {
     type Question = {
@@ -11,30 +11,19 @@ export function PersonalityTestPage() {
     const [answers, setAnswers] = useState<number[]>([]); // Stores the selected answers for each question
     const [personalityAdjective, setPersonalityAdjective] = useState<string | null>(null); // Stores the calculated personality adjective
     const [questions, setQuestions] = useState<Question[]>([]); // Stores the fetched questions from the API
-
+    const [isLoaded, setIsLoaded] = useState(false);
     // Fetch questions from an API endpoint when the component mounts
-    useEffect(() => {
-        const fetchQuestions = async () => {
-          try {
-            const response = await fetch("http://localhost:8888/.netlify/functions/questions"); // Replace with your API endpoint to fetch questions
-            const data = await response.json();
-            setQuestions(data.questions);
-            console.log(data);
-            console.log(questions);
-            console.log(data.questions);
-          } catch (error) {
-            console.error("Error fetching questions:", error);
-          }
-        };
+    
+    async function handleSubmit(){
+      const data = await fetchQuestions();
+      setQuestions(data.questions);
+      setIsLoaded(true);
       
-        fetchQuestions();
-      }, []);
-
-      if (questions.length === 0) {
-        return <div>Loading questions...</div>;
-      }
-
-  const handleAnswerSelect = (choice: number) => {
+    }
+    
+    handleSubmit();
+    
+    const handleAnswerSelect = (choice: number) => {
     const updatedAnswers = [...answers]; // Create a copy of the answers array
     updatedAnswers[currentQuestionIndex] = choice; // Update the answer for the current question index with the selected choice
     setAnswers(updatedAnswers);
@@ -108,12 +97,18 @@ export function PersonalityTestPage() {
 
   return (
     <div>
+      {isLoaded ? <div>Questions Loading...</div> : <>
       <h1>Personality Test</h1>
       {personalityAdjective ? renderResult() : renderQuestion()}
 
       {currentQuestionIndex === questions.length - 1 && (
         <button onClick={handleFormSubmit}>Submit</button>
       )}
+      </>
+}
+  
+      
+      
     </div>
   );
 }

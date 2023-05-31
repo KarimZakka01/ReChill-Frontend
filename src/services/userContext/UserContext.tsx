@@ -10,7 +10,7 @@ export interface User {
     email: string,
     password: string,
     dob: Date,
-    userType: "Therapist" | "Standard"
+    userType: "Therapist" | "Standard" | "Admin"
 }
 
 interface UserContextValue {

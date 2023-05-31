@@ -1,0 +1,15 @@
+.youtube {
+    @apply grow py-4 flex flex-col gap-4 items-center justify-center bg-gradient-to-tr to-primary from-secondary border-y-2 border-gray-400 w-full;
+    position: fixed;
+    top: 150px;
+    left: 0;
+    bottom: 150px;
+    right: 0;
+    z-index: -1;
+  }
+
+  .next-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 470px;
+  }

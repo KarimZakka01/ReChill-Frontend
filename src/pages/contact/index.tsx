@@ -3,6 +3,7 @@ import * as React from 'react';
 import './contact.styles.css';
 import {  useState } from 'react';
 import { contactus } from '@services/apiService';
+import { Button } from '@components/button';
 
 export function Contact() {
     // Stating the variables to hold the values of email, subject, and message
@@ -78,7 +79,9 @@ export function Contact() {
             required
           />
         </div>
-        <button className='contactButton' type="submit">Submit</button>
+        <div className="submit-button-container">
+        <Button type="submit">Submit</Button>
+        </div>
       </form>
     </div>
   );

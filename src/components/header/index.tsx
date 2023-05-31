@@ -19,12 +19,16 @@ export function Header(props: IHeaderProps) {
 
   return (
     <div className="header">
-      <Logo size="sm" src={ReChillLogoAlt} alt="ReChill colored logo" />
+      <Logo size="md" src={ReChillLogoAlt} alt="ReChill colored logo" />
       <nav className="header-navigation-container">
         <Link to="/">Home</Link>
         <Link to="/services">Services</Link>
         <Link to="/about">About</Link>
         <Link to="/contact">Contact Us</Link>
+        {isLoggedIn && user && user.userType === 'Admin' && (
+          <Link to="/admin">Admin Panel</Link>
+          
+        )}
       </nav>
       {!isLoggedIn && (
       <div className="header-action-buttons">
@@ -34,6 +38,8 @@ export function Header(props: IHeaderProps) {
         <Link to="/signup">
           <Button>Sign Up for free</Button>
         </Link>
+        
+        
        
       </div>
       )} 

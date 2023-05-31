@@ -44,7 +44,7 @@ insights into your personality traits and tendencies. Uncover the driving
  and embark on a transformative journey of self-discovery. 
 </DirectionalContainer>
 <DirectionalContainer
-  action={() => {}}
+  action={() => {navigate('/video')}}
   imageSource={ReChillLogo}
   title="Watch a Video"
   buttonText='Watch Now'
