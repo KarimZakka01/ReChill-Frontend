@@ -1,23 +1,21 @@
-
-import * as React from 'react';
-import './contact.styles.css';
-import {  useState } from 'react';
-import { contactus } from '@services/apiService';
-import { Button } from '@components/button';
+import * as React from "react";
+import "./contact.styles.css";
+import { useState } from "react";
+import { contactus } from "@services/apiService";
+import { Button } from "@components/button";
 
 export function Contact() {
-    // Stating the variables to hold the values of email, subject, and message
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  // Stating the variables to hold the values of email, subject, and message
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
-  
   // Event handler for email input change
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value); // Update the email state with the new input value
   };
 
-    // Event handler for subject input change
+  // Event handler for subject input change
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value); // Update the subject state with the new input value
   };
@@ -29,30 +27,24 @@ export function Contact() {
 
   // Event handler for form submission
   const handleSubmit = async () => {
-
-    
-  
-
-  
     // Create the request body object using the email, subject, and message values
     const requestBody = {
       email: email,
       subject: subject,
-      message: message
+      message: message,
     };
 
     const response = await contactus(requestBody);
-
-   
   };
 
   return (
     <div className="contact-form">
-      <h2>Contact Us</h2>
+      <h2 className="contact-header">Contact Us</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="text-white font-bold">Email:</label>
+          <label className="contact-label">Email:</label>
           <input
+            className="contact-input"
             type="email"
             value={email}
             onChange={handleEmailChange} // (function) is an event handler that updates the email state when the email input field value changes.
@@ -61,8 +53,9 @@ export function Contact() {
           />
         </div>
         <div className="form-group">
-          <label>Subject:</label>
+          <label className="contact-label">Subject:</label>
           <input
+            className="contact-input"
             type="text"
             value={subject}
             onChange={handleSubjectChange}
@@ -71,7 +64,7 @@ export function Contact() {
           />
         </div>
         <div className="form-group">
-          <label>Message:</label>
+          <label className="contact-label">Message:</label>
           <textarea
             value={message}
             onChange={handleMessageChange}
@@ -80,11 +73,9 @@ export function Contact() {
           />
         </div>
         <div className="submit-button-container">
-        <Button type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>
   );
-};
-
-
+}

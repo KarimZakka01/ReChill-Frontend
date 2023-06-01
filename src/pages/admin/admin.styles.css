@@ -1,0 +1,142 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .admin-header {
+    margin-top: 70px;
+    font-weight: bolder;
+    text-decoration: underline;
+    font-size: 20px;
+  }
+  
+  /* Therapist Table styles */
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* Form styles */
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .labels {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .admin-input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .admin-add {
+    @apply px-6 py-2
+    bg-primary
+    rounded-full
+    text-white
+    font-bold
+    shadow-md
+    hover:filter
+    hover:saturate-200
+    hover:shadow-sm
+    active:saturate-50
+    active:scale-95
+    ease-out
+    transition-all;
+    margin-left: 1738px;
+    margin-top: 20px;
+    font-size: 20px
+  }
+  
+  .admin-add-outlined {
+    @apply bg-transparent
+    border-solid
+    border-2
+    border-primary
+    text-primary;
+  }
+  
+  .admin-add-text {
+    @apply bg-transparent
+    shadow-none
+    hover:shadow-none
+    text-primary;
+  }
+  
+  
+  
+  /* Edit Therapist Form styles */
+  
+  .edit-form {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .edit-form label {
+    display: inline-block;
+    width: 120px;
+  }
+  
+  .edit-form input[type="text"] {
+    width: 300px;
+  }
+  
+  .admin-edit {
+    @apply px-6 py-2
+    bg-primary
+    rounded-full
+    text-white
+    font-bold
+    shadow-md
+    hover:filter
+    hover:saturate-200
+    hover:shadow-sm
+    active:saturate-50
+    active:scale-95
+    ease-out
+    transition-all;
+    margin-left: 620px;
+    margin-top: 20px;
+    font-size: 20px
+  }
+  
+  .admin-edit-outlined {
+    @apply bg-transparent
+    border-solid
+    border-2
+    border-primary
+    text-primary;
+  }
+  
+  .admin-edit-text {
+    @apply bg-transparent
+    shadow-none
+    hover:shadow-none
+    text-primary;
+  }
