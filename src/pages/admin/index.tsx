@@ -217,14 +217,17 @@ export function AdminPage() {
         />
 
         <label className="labels">Gender:</label>
-        <input
+        <select
           className="admin-input"
-          type="text"
-          placeholder="Gender"
+          value={newTherapist.gender}
           onChange={(e) =>
             setNewTherapist({ ...newTherapist, gender: e.target.value })
           }
-        />
+        >
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
 
         <label className="labels">Phone Number:</label>
         <input
@@ -315,9 +318,8 @@ export function AdminPage() {
             />
 
             <label className="labels">Gender:</label>
-            <input
+            <select
               className="admin-input"
-              type="text"
               value={editingTherapist.gender}
               onChange={(e) =>
                 setEditingTherapist({
@@ -325,7 +327,11 @@ export function AdminPage() {
                   gender: e.target.value,
                 })
               }
-            />
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
 
             <label className="labels">Phone Number:</label>
             <input
