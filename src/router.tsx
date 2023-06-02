@@ -1,76 +1,78 @@
-import { About } from '@pages/about';
-import Error from '@pages/error';
-import { Landing } from '@pages/landing';
-import { Login } from '@pages/login';
-import Root from '@pages/root';
-import { Services } from '@pages/services';
-import { Signup } from '@pages/signup';
-import { Contact } from '@pages/contact';
-import { PersonalityTestPage } from '@pages/personalitytest';
-import { TherapySessionPage } from '@pages/therapy';
-import { GamePage } from '@pages/services/game';
-import { VideoPage } from '@pages/youtube';
-import { AdminPage } from '@pages/admin';
-import {  RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import {  useUserContext } from '@services/userContext/UserContext';
-import { Profile } from '@pages/profile';
-
-
+import { About } from "@pages/about";
+import Error from "@pages/error";
+import { Landing } from "@pages/landing";
+import { Login } from "@pages/login";
+import Root from "@pages/root";
+import { Services } from "@pages/services";
+import { Signup } from "@pages/signup";
+import { Contact } from "@pages/contact";
+import { PersonalityTestPage } from "@pages/personalitytest";
+import { TherapySessionPage } from "@pages/therapy";
+import { GamePage } from "@pages/services/game";
+import { VideoPage } from "@pages/youtube";
+import { AdminPage } from "@pages/admin";
+import {
+  RouteObject,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
+import { useUserContext } from "@services/userContext/UserContext";
+import { Profile } from "@pages/profile";
 
 export interface IRouterProps {}
 
-const routes : RouteObject[] = [
+const routes: RouteObject[] = [
   {
-    path: '/',
+    path: "/",
     element: <Root />,
     errorElement: <Error />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Landing />,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About />,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <Login />,
       },
       {
-        path: '/signup',
+        path: "/signup",
         element: <Signup />,
       },
       {
-        path: '/services',
+        path: "/services",
         element: <Services />,
       },
       {
-        path: '/profile',
+        path: "/profile",
         element: <Profile />,
       },
       {
-        path: '/contact',
+        path: "/contact",
         element: <Contact />,
       },
       {
-        path: '/therapy/book',
+        path: "/therapy/book",
         element: <TherapySessionPage />,
       },
       {
-        path: '/personalitytest',
+        path: "/personalitytest",
         element: <PersonalityTestPage />,
       },
       {
-        path: '/game',
+        path: "/game",
         element: <GamePage />,
       },
       {
-        path: '/video',
+        path: "/video",
         element: <VideoPage />,
       },
       {
-        path: '/admin',
+        path: "/admin",
         element: <AdminPage />,
       },
     ],
@@ -78,23 +80,22 @@ const routes : RouteObject[] = [
 ];
 
 export default function Router() {
-
   const { isLoggedIn, user } = useUserContext();
-  const restrictedPaths: string[] = ['/about']; 
+  // const restrictedPaths: string[] = ["/about"];
 
   const filterRoutes = (routes: RouteObject[]): RouteObject[] => {
     let children = routes[0].children ?? [];
-    
 
-    if (!isLoggedIn) {
-      children =  children.filter(route => route.path && !restrictedPaths.includes(route.path)); // Exclude restricted paths when no user is logged in
-    }
-    
-    if (isLoggedIn && user?.userType === 'Therapist') {
+    // if (!isLoggedIn) {
+    //   children = children.filter(
+    //     (route) => route.path && !restrictedPaths.includes(route.path)
+    //   ); // Exclude restricted paths when no user is logged in
+    // }
+
+    if (isLoggedIn && user?.userType === "Therapist") {
       return routes; // Allow all routes for Therapists
     }
-    
-  
+
     routes[0].children = children;
     return routes;
   };

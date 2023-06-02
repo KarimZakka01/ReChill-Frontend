@@ -40,9 +40,11 @@ export function TherapySessionPage() {
   function generateSpaces(count: number) {
     return Array(count + 1).join("\u00A0");
   }
-
+  const generateSpacerStyles = (count: number) => {
+    const spacing = count * 8; // Adjust the spacing as needed
+    return { marginBottom: `${spacing}px` };
+  };
   return (
-    
     <div>
       <div>
         {therapists.map((therapist) => (
@@ -51,16 +53,33 @@ export function TherapySessionPage() {
             className="therapist-card"
             onClick={() => handleCardClick(therapist.email)}
           >
-            <img className="image-container" src={therapist.url} alt="Therapist" />
-            <h2>
-              {therapist.firstName} {therapist.lastName}
-            </h2>
-            
-            <p>Date of Birth: {generateSpaces(100)}{therapist.dob}</p>
-            <p>Gender: {generateSpaces(110)}{therapist.gender}</p>
-            <p>Phone Number: {generateSpaces(96)}{therapist.phoneNumber}</p>
-            <p>Location: {generateSpaces(108)}{therapist.location}</p>
-            <p>Email: {generateSpaces(114)}{therapist.email}</p>
+            <img
+              className="image-container"
+              src={therapist.url}
+              alt="Therapist"
+            />
+            <div className="therapist-card-content">
+              <h2>
+                {therapist.firstName} {therapist.lastName}
+              </h2>
+
+              <p style={generateSpacerStyles(1)}>
+                Date of Birth: {generateSpaces(80)} {therapist.dob}
+              </p>
+              <p style={generateSpacerStyles(1)}>
+                Gender:{generateSpaces(92)} {therapist.gender}
+              </p>
+              <p style={generateSpacerStyles(1)}>
+                Phone Number: {generateSpaces(76)}
+                {therapist.phoneNumber}
+              </p>
+              <p style={generateSpacerStyles(1)}>
+                Location: {therapist.location}
+              </p>
+              <p style={generateSpacerStyles(1)}>
+                Email:{generateSpaces(95)} {therapist.email}
+              </p>
+            </div>
           </div>
         ))}
       </div>

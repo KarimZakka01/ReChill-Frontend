@@ -121,7 +121,6 @@ export function AdminPage() {
         );
 
         if (response.ok) {
-          const data = await response.json();
           const updatedTherapists = therapists.map((therapist) =>
             therapist.id === editingTherapist.id ? editingTherapist : therapist
           );
@@ -346,7 +345,7 @@ export function AdminPage() {
               }
             />
 
-            <label className="labels">Locatiom:</label>
+            <label className="labels">Location:</label>
             <input
               className="admin-input"
               type="text"

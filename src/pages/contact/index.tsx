@@ -39,6 +39,7 @@ export function Contact() {
 
   return (
     <div className="contact-form">
+      <div className="contact-background-image"></div>
       <h2 className="contact-header">Contact Us</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
