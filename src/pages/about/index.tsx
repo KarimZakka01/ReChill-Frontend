@@ -10,6 +10,7 @@ import DirectionalContainer from "@components/directional-container";
 import { Button } from "@components/button";
 import ReChillLogo from "@assets/images/chicken.png";
 import { useNavigate } from "react-router-dom";
+import About_Leaves from '@assets/images/about leaves.jpeg'
 import * as React from "react"; //imports the React library
 import "./about.styles.css";
 //defines an interface for the props that can be passed to the About component.
@@ -21,7 +22,9 @@ export function About(props: IAboutProps) {
   const navigate = useNavigate();
   return (
     <div className="about">
-      <div className="about-background-image"></div>
+      <div className="about-background-image">
+        <img src={About_Leaves} alt="leaves"></img>
+      </div>
       <div className="about-header">
         <h1>About Us</h1>
         <p>Learn more about our website and our mission.</p>

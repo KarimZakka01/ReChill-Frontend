@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { Button } from "@components/button";
 import { useUserContext } from "@services/userContext/UserContext";
+import Snake from '@assets/images/snake.jpg'
 
 const initialGridSize = 20;
 const initialSpeed = 200; // in milliseconds
@@ -168,7 +169,9 @@ export function GamePage() {
 
   return (
     <div className="game-container">
-      <div className="background-image"></div>
+      <div>
+        <img src={Snake} alt="snake" className="background-image"></img>
+      </div>
       {isLoggedIn && user && (
         <h1 className="game-name">
           Player: {user.firstName} {user.lastName}

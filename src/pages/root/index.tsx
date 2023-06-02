@@ -3,7 +3,7 @@ import { Header } from '@components/header';
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 import './root.styles.css';
-import ChatBot from '@components/chatbot';
+import ChatBot from '@components/chatBot';
 
 
 export interface IRootProps {}

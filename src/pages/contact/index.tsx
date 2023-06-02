@@ -3,6 +3,7 @@ import "./contact.styles.css";
 import { useState } from "react";
 import { contactus } from "@services/apiService";
 import { Button } from "@components/button";
+import Plant from '@assets/images/plant.jpg'
 
 export function Contact() {
   // Stating the variables to hold the values of email, subject, and message
@@ -39,7 +40,9 @@ export function Contact() {
 
   return (
     <div className="contact-form">
-      <div className="contact-background-image"></div>
+      <div className="contact-background-image">
+        <img src={Plant} alt="plant"></img>
+      </div>
       <h2 className="contact-header">Contact Us</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
