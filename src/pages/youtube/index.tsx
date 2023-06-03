@@ -31,14 +31,22 @@ export const VideoPage: React.FC = () => {
   const handleNextButtonClick = () => {
     fetchRandomVideo(); // Fetch a new random video when the next button is clicked
   };
-
+  console.log(videoUrl);
+  
   return (
     <div>
       
       {videoUrl ? (
-        <div className="youtube">
-          <ReactPlayer url={videoUrl} width="1000px" height="450px" controls />
+        // <div className="youtube">
+        //   <ReactPlayer url={videoUrl} width="1000px" height="450px" controls />
+        // </div>
+        <div>
+        <div className="div-style">
+          <iframe src={videoUrl} className="inframe"  allow="autoplay; fullscreen; picture-in-picture">
+            </iframe>
         </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+        <p><a href="https://vimeo.com/825970185">Soft Animals</a> from <a href="https://vimeo.com/reneezhan">Renee Zhan</a> on <a href="https://vimeo.com">Vimeo</a>.</p></div>
       ) : (
         <p>Loading...</p>
       )}
