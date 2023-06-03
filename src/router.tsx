@@ -81,16 +81,16 @@ const routes: RouteObject[] = [
 
 export default function Router() {
   const { isLoggedIn, user } = useUserContext();
-  // const restrictedPaths: string[] = ["/about"];
+  const restrictedPaths: string[] = ["/admin","/therapy/book"];
 
   const filterRoutes = (routes: RouteObject[]): RouteObject[] => {
     let children = routes[0].children ?? [];
 
-    // if (!isLoggedIn) {
-    //   children = children.filter(
-    //     (route) => route.path && !restrictedPaths.includes(route.path)
-    //   ); // Exclude restricted paths when no user is logged in
-    // }
+    if (!isLoggedIn) {
+      children = children.filter(
+        (route) => route.path && !restrictedPaths.includes(route.path)
+      ); // Exclude restricted paths when no user is logged in
+    }
 
     if (isLoggedIn && user?.userType === "Therapist") {
       return routes; // Allow all routes for Therapists
