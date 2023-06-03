@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8888/.netlify/functions/";
+export const BASE_URL = "http://localhost:8888/.netlify/functions/";
 
 export async function login(email, password) {
   try {

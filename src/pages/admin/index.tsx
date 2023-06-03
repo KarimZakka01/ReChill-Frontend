@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./admin.styles.css";
 import { Button } from "@components/button";
+import { BASE_URL } from "@services/apiService";
 
 export function AdminPage() {
   interface Therapist {
-    id: string;
+    _id: string;
     firstName: string;
     lastName: string;
     dob: string;
@@ -16,6 +17,7 @@ export function AdminPage() {
   }
 
   const [therapists, setTherapists] = useState<Therapist[]>([]);
+  const [originalTherapists, setOriginalTherapists] = useState<Therapist[]>([]);
   const [editingTherapist, setEditingTherapist] = useState<Therapist | null>(
     null
   );
@@ -37,7 +39,7 @@ export function AdminPage() {
   const fetchTherapists = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8888/.netlify/functions/admin",
+        `${BASE_URL}/admin`,
         {
           method: "GET",
         }
@@ -47,8 +49,9 @@ export function AdminPage() {
         throw new Error("Failed to fetch therapists");
       }
 
-      const data = await response.json();
+      const data = await response.json();      
       setTherapists(data);
+      setOriginalTherapists(data);
     } catch (error) {
       console.error(error);
     }
@@ -57,7 +60,7 @@ export function AdminPage() {
   const addTherapist = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8888/.netlify/functions/admin",
+        `${BASE_URL}/admin`,
         {
           method: "POST",
           body: JSON.stringify(newTherapist),
@@ -89,9 +92,10 @@ export function AdminPage() {
   const deleteTherapist = async (therapistId: string) => {
     try {
       const response = await fetch(
-        "http://localhost:8888/.netlify/functions/admin",
+        `${BASE_URL}/admin`,
         {
           method: "DELETE",
+          credentials: "include",
           body: JSON.stringify({ therapistId }),
         }
       );
@@ -107,24 +111,30 @@ export function AdminPage() {
       console.error(error);
     }
   };
-
+  function searchTable(searchTerm : string) {
+    
+    setTherapists(originalTherapists.filter( x => x.firstName.includes(searchTerm)));
+    
+  }
   const editTherapist = async () => {
     try {
       if (editingTherapist) {
         // Send the updated therapist data to the server and update state
         const response = await fetch(
-          "http://localhost:8888/.netlify/functions/admin",
+          `${BASE_URL}/admin`,
           {
             method: "PUT",
+            credentials: "include",
             body: JSON.stringify(editingTherapist),
           }
         );
-
+          
         if (response.ok) {
           const updatedTherapists = therapists.map((therapist) =>
-            therapist.id === editingTherapist.id ? editingTherapist : therapist
+            therapist._id === editingTherapist._id ? editingTherapist : therapist
           );
           setTherapists(updatedTherapists);
+          setOriginalTherapists(updatedTherapists);
           setEditingTherapist(null);
         } else {
           console.error("Error editing therapist:", response.status);
@@ -143,11 +153,15 @@ export function AdminPage() {
   };
   return (
     <div>
+    <input
+      type="text"
+      placeholder="Search"
+      onChange={(e) => searchTable(e.currentTarget.value)}>
+    </input>
       {/* Therapist Table */}
       <table>
         <thead>
           <tr>
-            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Date of Birth</th>
@@ -161,8 +175,7 @@ export function AdminPage() {
         </thead>
         <tbody>
           {therapists.map((therapist) => (
-            <tr key={therapist.id}>
-              <td>{therapist.id}</td>
+            <tr key={therapist._id}>
               <td>{therapist.firstName}</td>
               <td>{therapist.lastName}</td>
               <td>{therapist.dob}</td>
@@ -173,7 +186,7 @@ export function AdminPage() {
               <td>{therapist.password}</td>
               <td>
                 <Button onClick={() => handleEditClick(therapist)}>Edit</Button>
-                <Button onClick={() => deleteTherapist(therapist.id)}>
+                <Button onClick={() => deleteTherapist(therapist._id)}>
                   Delete
                 </Button>
               </td>
@@ -208,7 +221,7 @@ export function AdminPage() {
         <label className="labels">Date of Birth:</label>
         <input
           className="admin-input"
-          type="text"
+          type="date"
           placeholder="Date of Birth"
           onChange={(e) =>
             setNewTherapist({ ...newTherapist, dob: e.target.value })

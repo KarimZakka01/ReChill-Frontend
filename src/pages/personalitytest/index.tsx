@@ -1,10 +1,12 @@
 import React, { useState, useEffect  } from "react";
 import { fetchQuestions } from "@services/apiService";
+import { BASE_URL } from "@services/apiService";
 
 export function PersonalityTestPage() {
     type Question = {
         questionText: string;
-        choices: { answerText: string; value: number }[];
+        _id: string
+        choices: { _id: string, answerText: string; value: number }[];
       };
       // State variables
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Keeps track of the current question index
@@ -16,12 +18,19 @@ export function PersonalityTestPage() {
     
     async function handleSubmit(){
       const data = await fetchQuestions();
-      setQuestions(data.questions);
-      setIsLoaded(true);
+      setQuestions(data);
+
+      renderResult();
+      renderQuestion();
       
     }
-    
-    handleSubmit();
+    useEffect(() => {
+      handleSubmit();;
+    }, []);
+    // if(!isLoaded){
+    //   setIsLoaded(true);
+    //   handleSubmit();
+    // }
     
     const handleAnswerSelect = (choice: number) => {
     const updatedAnswers = [...answers]; // Create a copy of the answers array
@@ -43,47 +52,48 @@ export function PersonalityTestPage() {
 
   const handleFormSubmit = async () => {
     // Send the answers to the server to calculate the personality adjective
-    const response = await fetch("http://localhost:8888/.netlify/functions/personalitytest", {
+    const response = await fetch(`${BASE_URL}/personalitytest`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      credentials: "include",
       body: JSON.stringify({ answers }),
     });
 
     // Parse the response data
     const data = await response.json();
+    
     setPersonalityAdjective(data.personalityAdjective); // Update the personalityAdjective state with the calculated value
   };
 
   const renderQuestion = () => {
     // Get the current question based on the current question index
     const question = questions[currentQuestionIndex];
-
-    return (
-      <div>
-        <h2>{question.questionText}</h2>
-        <ul>
-          {question.choices.map((choice: { answerText: string; value: number }, index: number) => (
-            <li key={index}>
-              <label>
-                <input
-                  type="radio"
-                  name="answer"
-                  value={choice.value}
-                  checked={answers[currentQuestionIndex] === choice.value}
-                  onChange={() => handleAnswerSelect(choice.value)}
-                />
-                {choice.answerText}
-              </label>
-            </li>
-          ))}
-        </ul>
-
-        <button onClick={handlePreviousQuestion}>Back</button>
-        <button onClick={handleNextQuestion}>Next</button>
-      </div>
-    );
+    
+    if(question !== undefined){
+      return (
+        <div>
+          <h2>{question.questionText}</h2>
+          <ul>
+            {question.choices.map((choice: { answerText: string; value: number }, index: number) => (
+              <li key={index}>
+                <label>
+                  <input
+                    type="radio"
+                    name="answer"
+                    value={choice.value}
+                    checked={answers[currentQuestionIndex] === choice.value}
+                    onChange={() => handleAnswerSelect(choice.value)}
+                  />
+                  {choice.answerText}
+                </label>
+              </li>
+            ))}
+          </ul>
+  
+          <button onClick={handlePreviousQuestion}>Back</button>
+          <button onClick={handleNextQuestion}>Next</button>
+        </div>
+      );
+    }
   };
 
   const renderResult = () => {
@@ -94,21 +104,24 @@ export function PersonalityTestPage() {
       </div>
     );
   };
-
-  return (
-    <div>
-      {isLoaded ? <div>Questions Loading...</div> : <>
-      <h1>Personality Test</h1>
-      {personalityAdjective ? renderResult() : renderQuestion()}
-
-      {currentQuestionIndex === questions.length - 1 && (
-        <button onClick={handleFormSubmit}>Submit</button>
-      )}
-      </>
-}
+  if(questions !== undefined){
+    return (
+      <div>
+        {isLoaded ? <div>Questions Loading...</div> : <>
+        <h1>Personality Test</h1>
+        {personalityAdjective ? renderResult() : renderQuestion()}
   
-      
-      
-    </div>
-  );
+        {currentQuestionIndex === questions.length - 1 && (
+          <button onClick={handleFormSubmit}>Submit</button>
+        )}
+        </>
+  }
+      </div>
+    );
+
+  }else{
+    return (
+    <div>Questions Loading...</div>
+    )
+  }
 }
