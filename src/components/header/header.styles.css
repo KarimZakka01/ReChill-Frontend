@@ -1,5 +1,5 @@
 .header {
-  @apply py-14 px-10 flex justify-between items-center gap-20 text-xl	;
+  @apply py-14 px-10 flex justify-between items-center gap-20 text-xl;
 }
 
 .header-navigation-container {
@@ -12,4 +12,20 @@
 
 .header-action-buttons {
   @apply flex gap-5;
+}
+
+/* Media Queries for responsiveness */
+
+@media (max-width: 768px) {
+  .header {
+    @apply flex-col items-center;
+  }
+
+  .header-navigation-container {
+    @apply flex-col items-center gap-5;
+  }
+
+  .header-action-buttons {
+    @apply flex-col items-center gap-5;
+  }
 }

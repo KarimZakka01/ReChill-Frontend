@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./therapy.styles.css";
 
-export function TherapySessionPage() {
+export function Therapy() {
   interface Therapist {
     _id: string;
     firstName: string;
@@ -67,14 +67,14 @@ export function TherapySessionPage() {
                 Date of Birth: {generateSpaces(80)} {therapist.dob}
               </p>
               <p style={generateSpacerStyles(1)}>
-                Gender:{generateSpaces(92)} {therapist.gender}
+                Gender:{generateSpaces(91)} {therapist.gender}
               </p>
               <p style={generateSpacerStyles(1)}>
-                Phone Number: {generateSpaces(76)}
+                Phone Number: {generateSpaces(77)}
                 {therapist.phoneNumber}
               </p>
               <p style={generateSpacerStyles(1)}>
-                Location: {therapist.location}
+                Location: {generateSpaces(88)} {therapist.location}
               </p>
               <p style={generateSpacerStyles(1)}>
                 Email:{generateSpaces(95)} {therapist.email}

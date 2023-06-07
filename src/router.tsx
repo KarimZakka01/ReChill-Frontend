@@ -7,7 +7,7 @@ import { Services } from "@pages/services";
 import { Signup } from "@pages/signup";
 import { Contact } from "@pages/contact";
 import { PersonalityTestPage } from "@pages/personalitytest";
-import { TherapySessionPage } from "@pages/therapy";
+import { Therapy } from "@pages/therapy";
 import { GamePage } from "@pages/services/game";
 import { VideoPage } from "@pages/youtube";
 import { AdminPage } from "@pages/admin";
@@ -56,8 +56,8 @@ const routes: RouteObject[] = [
         element: <Contact />,
       },
       {
-        path: "/therapy/book",
-        element: <TherapySessionPage />,
+        path: "/therapy",
+        element: <Therapy />,
       },
       {
         path: "/personalitytest",
@@ -81,20 +81,20 @@ const routes: RouteObject[] = [
 
 export default function Router() {
   const { isLoggedIn, user } = useUserContext();
-  const restrictedPaths: string[] = ["/admin","/therapy/book"];
+  const restrictedPaths: string[] = ["/therapy"];
 
   const filterRoutes = (routes: RouteObject[]): RouteObject[] => {
     let children = routes[0].children ?? [];
 
-    if (!isLoggedIn) {
-      children = children.filter(
-        (route) => route.path && !restrictedPaths.includes(route.path)
-      ); // Exclude restricted paths when no user is logged in
-    }
+    // if (!isLoggedIn) {
+    //   children = children.filter(
+    //     (route) => route.path && !restrictedPaths.includes(route.path)
+    //   ); // Exclude restricted paths when no user is logged in
+    // }
 
-    if (isLoggedIn && user?.userType === "Therapist") {
-      return routes; // Allow all routes for Therapists
-    }
+    // if (isLoggedIn && user?.userType === "Admin") {
+    //   return routes; // Allow all routes for Therapists
+    // }
 
     routes[0].children = children;
     return routes;

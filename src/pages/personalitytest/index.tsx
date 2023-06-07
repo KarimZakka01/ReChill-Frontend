@@ -1,96 +1,101 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchQuestions } from "@services/apiService";
 import { BASE_URL } from "@services/apiService";
+import "./personalitytest.style.css"; // Import the CSS file with the provided styling
+import { Button } from "@components/button";
 
 export function PersonalityTestPage() {
-    type Question = {
-        questionText: string;
-        _id: string
-        choices: { _id: string, answerText: string; value: number }[];
-      };
-      // State variables
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Keeps track of the current question index
-    const [answers, setAnswers] = useState<number[]>([]); // Stores the selected answers for each question
-    const [personalityAdjective, setPersonalityAdjective] = useState<string | null>(null); // Stores the calculated personality adjective
-    const [questions, setQuestions] = useState<Question[]>([]); // Stores the fetched questions from the API
-    const [isLoaded, setIsLoaded] = useState(false);
-    // Fetch questions from an API endpoint when the component mounts
-    
-    async function handleSubmit(){
-      const data = await fetchQuestions();
-      setQuestions(data);
+  type Question = {
+    questionText: string;
+    _id: string;
+    choices: { _id: string; answerText: string; value: number }[];
+  };
 
-      renderResult();
-      renderQuestion();
-      
-    }
-    useEffect(() => {
-      handleSubmit();;
-    }, []);
-    // if(!isLoaded){
-    //   setIsLoaded(true);
-    //   handleSubmit();
-    // }
-    
-    const handleAnswerSelect = (choice: number) => {
-    const updatedAnswers = [...answers]; // Create a copy of the answers array
-    updatedAnswers[currentQuestionIndex] = choice; // Update the answer for the current question index with the selected choice
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<number[]>([]);
+  const [personalityAdjective, setPersonalityAdjective] = useState<
+    string | null
+  >(null);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false); // Tracks whether the form has been submitted
+
+  async function handleSubmit() {
+    const data = await fetchQuestions();
+    setQuestions(data);
+
+    renderResult();
+    renderQuestion();
+  }
+
+  useEffect(() => {
+    handleSubmit();
+  }, []);
+
+  const handleAnswerSelect = (choice: number) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentQuestionIndex] = choice;
     setAnswers(updatedAnswers);
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) { // Move to the next question if there are more questions available
+    if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1); // Move to the previous question if it's not the first question
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
   const handleFormSubmit = async () => {
-    // Send the answers to the server to calculate the personality adjective
-    const response = await fetch(`${BASE_URL}/personalitytest`, {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({ answers }),
-    });
+    if (!isSubmitted && answers.length === questions.length) {
+      setIsSubmitted(true);
+      const response = await fetch(`${BASE_URL}/personalitytest`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ answers }),
+      });
 
-    // Parse the response data
-    const data = await response.json();
-    
-    setPersonalityAdjective(data.personalityAdjective); // Update the personalityAdjective state with the calculated value
+      const data = await response.json();
+
+      setPersonalityAdjective(data.personalityAdjective);
+    }
   };
 
   const renderQuestion = () => {
-    // Get the current question based on the current question index
     const question = questions[currentQuestionIndex];
-    
-    if(question !== undefined){
+
+    if (question !== undefined) {
       return (
         <div>
           <h2>{question.questionText}</h2>
           <ul>
-            {question.choices.map((choice: { answerText: string; value: number }, index: number) => (
+            {question.choices.map((choice, index) => (
               <li key={index}>
                 <label>
-                  <input
-                    type="radio"
-                    name="answer"
-                    value={choice.value}
-                    checked={answers[currentQuestionIndex] === choice.value}
-                    onChange={() => handleAnswerSelect(choice.value)}
-                  />
-                  {choice.answerText}
+                  <div
+                    className={`answer-box ${
+                      answers[currentQuestionIndex] === choice.value
+                        ? "selected"
+                        : ""
+                    }`}
+                    onClick={() => handleAnswerSelect(choice.value)}
+                  >
+                    <span className="answer-text">{choice.answerText}</span>
+                  </div>
                 </label>
               </li>
             ))}
           </ul>
-  
-          <button onClick={handlePreviousQuestion}>Back</button>
-          <button onClick={handleNextQuestion}>Next</button>
+          <div className="test-button-group">
+            <Button onClick={handlePreviousQuestion}>Back</Button>
+            {currentQuestionIndex !== questions.length - 1 && (
+              <Button onClick={handleNextQuestion}>Next</Button>
+            )}
+          </div>
         </div>
       );
     }
@@ -98,30 +103,54 @@ export function PersonalityTestPage() {
 
   const renderResult = () => {
     return (
-      <div>
+      <div className="personality-test-result">
         <h2>Your Personality Adjective: {personalityAdjective}</h2>
         {/* Add additional result information if needed */}
+        <Button onClick={handleRestart}>Restart</Button>
       </div>
     );
   };
-  if(questions !== undefined){
+
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0); // Reset the current question index
+    setAnswers([]); // Reset the answers
+    setPersonalityAdjective(null); // Reset the personality adjective
+    setIsSubmitted(false); // Reset the submit state
+  };
+
+  if (questions !== undefined) {
     return (
-      <div>
-        {isLoaded ? <div>Questions Loading...</div> : <>
-        <h1>Personality Test</h1>
-        {personalityAdjective ? renderResult() : renderQuestion()}
-  
-        {currentQuestionIndex === questions.length - 1 && (
-          <button onClick={handleFormSubmit}>Submit</button>
+      <div className="personality-test-container">
+        {isLoaded ? (
+          <div className="personality-test-loading">Questions Loading...</div>
+        ) : (
+          <>
+            <h1 className="personality-test-header">Personality Test</h1>
+            {personalityAdjective ? (
+              <div className="personality-test-result">{renderResult()}</div>
+            ) : (
+              <div className="personality-test-question">
+                {renderQuestion()}
+              </div>
+            )}
+
+            {currentQuestionIndex === questions.length - 1 &&
+              !personalityAdjective && (
+                <div className="personality-test-submit">
+                  {answers.length === questions.length ? (
+                    <Button onClick={handleFormSubmit}>Submit</Button>
+                  ) : (
+                    <p className="warning-message">
+                      Please answer all the questions
+                    </p>
+                  )}
+                </div>
+              )}
+          </>
         )}
-        </>
-  }
       </div>
     );
-
-  }else{
-    return (
-    <div>Questions Loading...</div>
-    )
+  } else {
+    return <div className="personality-test-loading">Questions Loading...</div>;
   }
 }

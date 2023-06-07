@@ -1,5 +1,10 @@
 import DirectionalContainer from "@components/directional-container";
 import ReChillLogo from "@assets/images/chicken.png";
+import servicesTherapy from "@assets/images/servicesTherapy.png";
+import servicesTest from "@assets/images/servicesTest.png";
+import servicesVideo from "@assets/images/servicesVideo.png";
+import servicesGame from "@assets/images/servicesGame.png";
+import servicesChatbot from "@assets/images/servicesChatbot.png";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "@services/userContext/UserContext";
 
@@ -9,6 +14,16 @@ export interface IServicesProps {}
 export function Services(props: IServicesProps) {
   const { isLoggedIn, user } = useUserContext();
   const navigate = useNavigate();
+
+  // function navigateToBooking() {
+  //   if (isLoggedIn && user?.userType === "Admin") {
+  //     navigate("/therapy");
+  //     console.log(isLoggedIn);
+  //     console.log(user.userType);
+  //   } else {
+  //     alert("You must be signed in to access our therapists list");
+  //   }
+  // }
 
   function openChatbot() {
     if (isLoggedIn && user) {
@@ -22,19 +37,19 @@ export function Services(props: IServicesProps) {
     }
   }
 
-  function navigateToBooking() {
-    if (isLoggedIn && user?.userType === "Standard") {
-      navigate("/therapy/book");
+  function navigateToPage(path: string) {
+    if (isLoggedIn) {
+      navigate(path);
     } else {
-      alert("You must be signed in to access our therapists list");
+      alert("You must be signed in to access this page");
     }
   }
 
   return (
     <div className="services">
       <DirectionalContainer
-        action={navigateToBooking}
-        imageSource={ReChillLogo}
+        action={() => navigateToPage("/therapy")}
+        imageSource={servicesTherapy}
         title="Book a Session"
         buttonText="Book Now"
       >
@@ -44,62 +59,53 @@ export function Services(props: IServicesProps) {
         transformative journey of self-discovery and personal growth.
       </DirectionalContainer>
       <DirectionalContainer
-        action={() => {
-          navigate("/personalitytest");
-        }}
-        imageSource={ReChillLogo}
+        action={() => navigateToPage("/personalitytest")}
+        imageSource={servicesTest}
         title="Take a Test"
         reverse
         buttonText="Start Now"
       >
-        Personality Test: Discover the depths of your true self. Gain profound
-        insights into your personality traits and tendencies. Uncover the
-        driving forces behind your thoughts and behaviors. Embrace
-        self-awareness and unlock the path to personal growth. Take our
-        comprehensive personality test today and embark on a transformative
-        journey of self-discovery.
+        Discover the depths of your true self. Gain profound insights into your
+        personality traits and tendencies. Uncover the driving forces behind
+        your thoughts and behaviors. Take our comprehensive personality test
+        today and embark on a transformative journey of self-discovery.
       </DirectionalContainer>
       <DirectionalContainer
-        action={() => {
-          navigate("/video");
-        }}
-        imageSource={ReChillLogo}
+        action={() => navigateToPage("/video")}
+        imageSource={servicesVideo}
         title="Watch a Video"
         buttonText="Watch Now"
       >
-        Fuel your soul with daily inspiration. Immerse yourself in a world of
-        captivating videos that awaken your inner potential. Explore
-        thought-provoking content that ignites curiosity, sparks creativity, and
-        nurtures personal growth. Let our handpicked selection of daily videos
-        be your source of motivation, empowerment, and self-discovery.
+        Immerse yourself in a world of captivating videos that awaken your inner
+        potential. Explore thought-provoking content that ignites curiosity,
+        sparks creativity, and nurtures personal growth. Let our handpicked
+        selection of daily videos be your source of motivation, empowerment, and
+        self-discovery.
       </DirectionalContainer>
       <DirectionalContainer
-        action={() => {
-          navigate("/game");
-        }}
-        imageSource={ReChillLogo}
+        action={() => navigateToPage("/game")}
+        imageSource={servicesGame}
         title="Play a game"
         reverse
         buttonText="Play Now"
       >
-        Unleash your inner adventurer. Take your mind off things and embark on
-        an endless quest of excitement and challenge. Lose yourself in the
-        captivating realm of our addictive game, where time fades away and pure
-        enjoyment takes center stage. Push your limits and experience the thrill
-        of surpassing your own achievements. Get ready to immerse yourself in an
-        addictive gaming experience like no other."
+        Take your mind off things and embark on an endless quest of excitement
+        and challenge. Lose yourself in the captivating realm of our addictive
+        game, where time fades away and pure enjoyment takes center stage. Get
+        ready to immerse yourself in an addictive gaming experience like no
+        other.
       </DirectionalContainer>
       <DirectionalContainer
         action={openChatbot}
-        imageSource={ReChillLogo}
+        imageSource={servicesChatbot}
         title="Talk to Chatbot"
         buttonText="Chat Now"
       >
-        Your friendly guide on the path to clarity. Meet our knowledgeable
-        chatbot, ready to provide instant support and guidance whenever you need
-        it. Engage in meaningful conversations, ask questions, and receive
-        personalized insights. Embrace the power of AI assistance and embark on
-        a transformative journey towards a calmer, more balanced mind.
+        Meet our knowledgeable chatbot, ready to provide instant support and
+        guidance whenever you need it. Engage in meaningful conversations, ask
+        questions, and receive personalized insights. Embrace the power of AI
+        assistance and embark on a transformative journey towards a calmer, more
+        balanced mind.
       </DirectionalContainer>
     </div>
   );
